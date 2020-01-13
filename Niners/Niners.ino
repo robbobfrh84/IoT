@@ -1,6 +1,6 @@
 #include <FastLED.h>
 
-#define NUM_LEDS 12
+#define NUM_LEDS 24
 
 CRGB leds[NUM_LEDS];
 
@@ -33,13 +33,25 @@ void loop(){
     leds[3] = CRGB(cols[1][0],cols[1][1],cols[1][2]);
     leds[4] = CRGB(cols[2][0],cols[2][1],cols[2][2]);
     leds[5] = CRGB(cols[2][0],cols[2][1],cols[2][2]);
-
-    leds[11] = CRGB(cols[0][0],cols[0][1],cols[0][2]);
-    leds[10] = CRGB(cols[0][0],cols[0][1],cols[0][2]);
-    leds[9] = CRGB(cols[1][0],cols[1][1],cols[1][2]);
+    leds[6] = CRGB(cols[0][0],cols[0][1],cols[0][2]);
+    leds[7] = CRGB(cols[0][0],cols[0][1],cols[0][2]);
     leds[8] = CRGB(cols[1][0],cols[1][1],cols[1][2]);
-    leds[7] = CRGB(cols[2][0],cols[2][1],cols[2][2]);
-    leds[6] = CRGB(cols[2][0],cols[2][1],cols[2][2]);
+    leds[9] = CRGB(cols[1][0],cols[1][1],cols[1][2]);
+    leds[10] = CRGB(cols[2][0],cols[2][1],cols[2][2]);
+    leds[11] = CRGB(cols[2][0],cols[2][1],cols[2][2]);
+
+    leds[23] = CRGB(cols[0][0],cols[0][1],cols[0][2]);
+    leds[22] = CRGB(cols[0][0],cols[0][1],cols[0][2]);
+    leds[21] = CRGB(cols[1][0],cols[1][1],cols[1][2]);
+    leds[20] = CRGB(cols[1][0],cols[1][1],cols[1][2]);
+    leds[19] = CRGB(cols[2][0],cols[2][1],cols[2][2]);
+    leds[18] = CRGB(cols[2][0],cols[2][1],cols[2][2]);
+    leds[17] = CRGB(cols[0][0],cols[0][1],cols[0][2]);
+    leds[16] = CRGB(cols[0][0],cols[0][1],cols[0][2]);
+    leds[15] = CRGB(cols[1][0],cols[1][1],cols[1][2]);
+    leds[14] = CRGB(cols[1][0],cols[1][1],cols[1][2]);
+    leds[13] = CRGB(cols[2][0],cols[2][1],cols[2][2]);
+    leds[12] = CRGB(cols[2][0],cols[2][1],cols[2][2]);
     
     int temp = cols[0], j; 
     for (j = 0; j < 2; j++) {
