@@ -15,8 +15,8 @@ int ar2[] = {5, 6, 7, 8, 9, 10};
 
 
 void setup() { 
+  delay( 3000 ); // power-up safety delay
   FastLED.addLeds<NEOPIXEL,12>(leds, NUM_LEDS); 
-  Serial.begin(9600);
   cols[0] = red;
   cols[1] = gold;
   cols[2] = white;
@@ -26,6 +26,13 @@ void setup() {
 void loop(){ 
   
   for(int i = 0; i < 3; i++) { 
+
+    for (int k = 0; k < NUM_LEDS; k++) {
+      leds[k] = CRGB(0,0,0);
+    }
+    FastLED.show();
+    delay(10);
+
 
     leds[0] = CRGB(cols[0][0],cols[0][1],cols[0][2]);
     leds[1] = CRGB(cols[0][0],cols[0][1],cols[0][2]);
@@ -52,6 +59,7 @@ void loop(){
     leds[14] = CRGB(cols[1][0],cols[1][1],cols[1][2]);
     leds[13] = CRGB(cols[2][0],cols[2][1],cols[2][2]);
     leds[12] = CRGB(cols[2][0],cols[2][1],cols[2][2]);
+    FastLED.show();
     
     int temp = cols[0], j; 
     for (j = 0; j < 2; j++) {
@@ -59,9 +67,8 @@ void loop(){
     }
     cols[j] = temp; 
 
-    FastLED.show();
-    delay(500);
-    
+    delay(750);
+  
   }
 
 }
