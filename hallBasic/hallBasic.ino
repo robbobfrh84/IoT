@@ -1,25 +1,15 @@
-// NOTE: if you want to use more pins the 2 (2&3) - see hallMulti folder
-
-const byte ledPin = 13;
-const byte interruptPin = 0; // !!! Actually, It's pin 2, attachInterrupt only works with pins 2 & 3 (0,1)
-volatile byte state = LOW;
-volatile byte oldState = LOW;
+int hallPin = 2;
+int ledPin = 13;
 
 void setup() {
- pinMode(ledPin, OUTPUT);
- pinMode(interruptPin, INPUT_PULLUP);
- attachInterrupt(interruptPin, changeState, CHANGE);
- Serial.begin(9600);
+  Serial.begin(9600);
+  pinMode(hallPin,INPUT);
+  pinMode(ledPin,OUTPUT);
 }
 
 void loop() {
- digitalWrite(ledPin, state);
- if (oldState != state) {
-    Serial.println(state);
-    oldState = state;
- }  
-}
-
-void changeState() {
- state = !state;
+  int hallPinState = digitalRead(hallPin);
+  Serial.println("hallPinState: "+String(hallPinState));
+  digitalWrite(ledPin, !hallPinState);
+  delay(1);
 }
