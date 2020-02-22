@@ -1,0 +1,2 @@
+#define SECRET_SSID "ATT6R6j6Y8"
+#define SECRET_PASS "22572+5w7b7z"
