@@ -1,9 +1,14 @@
 #include "ShiftIn.h"
+#define FASTLED_ESP8266_RAW_PIN_ORDER
+// #define FASTLED_ESP8266_NODEMCU_PIN_ORDER
+// #define FASTLED_ESP8266_D1_PIN_ORDER
 #include <FastLED.h>
+
 #define NUM_LEDS 32
 #define CHIPS 4
 
-const int ledStripPin = 7;
+// const int ledStripPin = 7; 
+#define ledStripPin D5
 
 ShiftIn<CHIPS> shift;
 
@@ -11,7 +16,8 @@ CRGB ledStrip[NUM_LEDS];
 
 void setup() {
   Serial.begin(9600); // declare pins: pLoadPin, clockEnablePin, dataPin, clockPin
-  shift.begin(8, 9, 11, 12);
+  //shift.begin(8,9,10,11); 
+  shift.begin(D1, D2, D3, D4);
   FastLED.addLeds<NEOPIXEL,ledStripPin>(ledStrip, NUM_LEDS); 
 }
 
