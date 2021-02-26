@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='en'>
+<title> ESP8266 Server </title>
+<link rel='icon' href='https://raw.githubusercontent.com/robbobfrh84/drive/master/images/SystemIcons-Images/code.png?token=ADYWSUWL4GA3YTJRHIZRTHK7RGREU'>
+<head>
+  <meta charset='UTF-8'><meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <link rel='stylesheet' href='css/style.css'>
+</head>
+<body>
+
+  <h1> Serve Html & Api MKR1000 </h1>
+  <input type='checkbox' id='led13' onclick='ledToggle(13)'> LED 13 state 
+  </br>
+  <input type='checkbox' id='led15' onclick='ledToggle(15)'> LED 15 state
+  </br></br>
+
+  <span id='btn' style='padding: 5px;'></span>
+
+  <script type='text/javascript' src='js/app.js'></script>
+  <script>
+
+    setInterval(()=>{
+      query(
+        'DR=12' // DigitalRead output pin #12 state
+      )
+    },1000)
+
+    ledToggle = (pin)=>{
+      query(
+        'DW='+pin+','+(window["led"+pin].checked ? '1' : '0') // DigitalWrite output pin #12 HIGH
+      +'&DR=12' // DigitalRead output pin #2 state
+      )
+    }
+
+  </script>
+
+</body>
+</html>
