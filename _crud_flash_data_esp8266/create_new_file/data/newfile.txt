@@ -1,0 +1,6 @@
+This
+Is
+The
+Contents
+Of
+NewFile
