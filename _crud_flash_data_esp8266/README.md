@@ -13,7 +13,12 @@ This example folder will show you how to create perminent memory stored on the e
 - To add the *data* folder files, use the Arduino IDE...
   - Select Tools > ESP8266 Sketch Data Upload
   - Note: You must create a *data* folder to upload your files. the SPIFFS library only looks for that folder name when uploading files.
-  - Additionally:  
+
+### /read_file_contents
+- This script should print the contents of specified `filename`.
+```c++
+filename = "/scripts_made_me.txt";
+```
 
 
 # Resources

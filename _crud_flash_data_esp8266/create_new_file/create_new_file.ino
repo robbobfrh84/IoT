@@ -12,8 +12,8 @@ void setup() {
   } else {
     Serial.print("\nCreating new file: "); Serial.println(filename);
     File file = SPIFFS.open(filename, "w");
-    file.println("name,number,email");
-    file.println("bob,49,bob@mail.com");
+    file.print("name,number,email\n");
+    file.print("bob,49,bob@mail.com\n");
   }
 }
 

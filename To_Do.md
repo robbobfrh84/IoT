@@ -8,8 +8,8 @@ _crud_flash_data_esp8266
 - [x] Read all file names sketch
 - [x] Read file contents
 - [x] update data to a file(append)
-- [🔥] Extract all files sketch with python script?
 - [x] delete file
-- [ ] update *# Example work flow* in README.md
+- [x] Extract all files sketch with python script?
+- [🔥] update *# Example work flow* in README.md
 
 # Down the Road examples...
