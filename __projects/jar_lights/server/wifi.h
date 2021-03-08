@@ -1,16 +1,16 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266mDNS.h>
-#include <FS.h>  
+#include <FS.h>
 #include "arduino_secrets.h"
 
 void setupWifi() {
   delay(10);
   Serial.println('\n');
-  wifiMulti.addAP(SECRET_SSID, SECRET_PASS);   
+  wifiMulti.addAP(SECRET_SSID, SECRET_PASS);
   Serial.println("Connecting ...");
   int i = 0;
-  while (wifiMulti.run() != WL_CONNECTED) { 
+  while (wifiMulti.run() != WL_CONNECTED) {
     indicatorYellow();
     delay(125);
     indicatorRed();
@@ -19,10 +19,10 @@ void setupWifi() {
   }
   Serial.println('\n');
   Serial.print("Connected to ");
-  Serial.println(WiFi.SSID());             
+  Serial.println(WiFi.SSID());
   Serial.print("IP address:\t");
-  Serial.println(WiFi.localIP());           
-  if (MDNS.begin("esp8266")) {              
+  Serial.println(WiFi.localIP());
+  if (MDNS.begin("esp8266")) {
     Serial.println("mDNS responder started");
     indicatorGreen();
   } else {
@@ -32,13 +32,22 @@ void setupWifi() {
 }
 
 void startWifi() {
-  SPIFFS.begin();                           
-  server.begin();                           
+  SPIFFS.begin();
+  server.begin();
   Serial.println("HTTP server started");
 }
 
 void listenWifi(void) {
   server.handleClient();
+  if (clientPause) {
+    delay(100);
+    Serial.println("\n\n  clientPause: \n");
+    clientPause = false;
+  }
+  // if (clientPause < 500) {
+  //   clientPause += clientPause + 1;
+  // }
+  // clientPause += clientPause + 1;
 }
 
 void buf(DynamicJsonDocument obj) {
@@ -67,16 +76,24 @@ String getContentType(String filename) {
   return "text/plain";
 }
 
-bool handleFileRead(String path) { 
-  Serial.println("handleFileRead: " + path);
-  if (path.endsWith("/")) path += "index.html";         
+bool handleFileRead(String path) {
+  Serial.print("handleFileRead: " + path);
+  // String count = String(clientPause);
+  // Serial.println(" - clientPause: " + count);
+
+  if (path.endsWith("/")) path += "index.html";
   String contentType = getContentType(path);
-  if (SPIFFS.exists(path)) {                            
-    File file = SPIFFS.open(path, "r");                 
-    size_t sent = server.streamFile(file, contentType); 
-    file.close();                                       
+  if (SPIFFS.exists(path)) {
+    clientPause = true;
+
+    File file = SPIFFS.open(path, "r");
+    // size_t sent = server.streamFile(file, contentType);
+    server.streamFile(file, contentType);
+    Serial.println("\nSent: " + path);
+    file.close();
+    // clientPause = false;
     return true;
   }
   Serial.println("\tFile Not Found");
-  return false;                                         
+  return false;
 }

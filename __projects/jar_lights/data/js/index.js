@@ -1,4 +1,4 @@
-const url = "http://192.168.1.123";
+const url = "http://192.168.1.140";
 let inverted = true
 let pairDir = inverted ? -1 : 1
 let data = {}

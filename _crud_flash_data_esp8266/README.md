@@ -20,6 +20,24 @@ This example folder will show you how to create perminent memory stored on the e
 filename = "/scripts_made_me.txt";
 ```
 
+### /read_all_file_name
+- This script will log all the filenames.
+
+### /update_file_contents
+- This script will add a line to the end of specified `filename`.
+```c++
+filename = "/scripts_made_me.txt";
+```
+
+### /delete_file
+- This script will delete the specified `filename`.
+```c++
+filename = "/scripts_made_me.txt";
+```
+
+### /extract_all_data
+- This is the script get all your data from the microcontroller to your comp in a folder!
+- See `/extract_all_data/README.md` for more details
 
 # Resources
 https://makersportal.com/blog/2018/2/25/python-datalogger-reading-the-serial-output-from-arduino-to-analyze-data-using-pyserial

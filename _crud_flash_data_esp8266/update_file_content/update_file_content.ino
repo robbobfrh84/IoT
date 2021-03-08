@@ -11,7 +11,7 @@ void setup() {
     Serial.println("\nFile not found :(");
   } else {
     Serial.print("\nUpdating file: "); Serial.println(filename);
-    file.println("emily,35,emily@mail.com");
+    file.print("emily,35,emily@mail.com\n");
   }
 }
 
