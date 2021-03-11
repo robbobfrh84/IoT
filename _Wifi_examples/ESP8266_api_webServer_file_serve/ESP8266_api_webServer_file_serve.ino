@@ -1,10 +1,4 @@
-#include <ESP8266WebServer.h>
-#include <ESP8266WiFiMulti.h>
-
-ESP8266WiFiMulti wifiMulti;  
-ESP8266WebServer server(80);    
-
-String ipAddress; 
+bool wifiConnected = false; 
 #include "server/routes.h"; // NOTE: server/wifi.h is included in server/routes.h
 
 void setup(void) {
@@ -13,14 +7,21 @@ void setup(void) {
   pinMode(13, OUTPUT);
   pinMode(15, OUTPUT);
   setupWifi();
-  server.onNotFound([]() {                              
-    if (!handleFileRead(server.uri()))                  
-      server.send(404, "text/plain", "404: Not Found"); 
-  });
-  server.on("/q", API_query); 
-  startWifi();
+  if (wifiConnected) {
+    server.onNotFound([]() {                              
+      if (!handleFileRead(server.uri()))                  
+        server.send(404, "text/plain", "404: Not Found"); 
+    });
+    server.on("/q", API_query); 
+    startWifi();
+  }
 }
 
 void loop(void) {
-  listenWifi();
+  if (wifiConnected) {
+    listenWifi();
+  } else {
+    delay(5000);
+    Serial.println("Wifi Connection failed, reset to try again");
+  }
 }

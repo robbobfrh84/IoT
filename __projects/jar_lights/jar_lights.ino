@@ -2,8 +2,6 @@
 #include <FastLED.h>
 #include <ArduinoJson.h>
 #include <ESP8266WebServer.h>
-#include <ESP8266WiFiMulti.h>
-ESP8266WiFiMulti wifiMulti;
 ESP8266WebServer server(80);
 
 #define LED_PIN     12 // 12 - ADAFRUIT HUZZAH FEATHER | 2 - NODE MCU
@@ -16,7 +14,6 @@ DynamicJsonDocument data(2048);
 CRGBArray<NUM_LEDS> aleds; // Special for Twinkle_fox
 CRGB leds[NUM_LEDS];
 
-String ipAddress;
 const int indicatorR = 15; // 15 - ADAFRUIT HUZZAH FEATHER | 1 - NODE MCU
 const int indicatorG = 13; // 13 - ADAFRUIT HUZZAH FEATHER | 3 - NODE MCU
 const int indicatorB = 0; // 0 - ADAFRUIT HUZZAH FEATHER | 15 - NODE MCU
@@ -26,8 +23,9 @@ const int toggleBtn = 14;  // 14 - ADAFRUIT HUZZAH FEATHER | ? - NODE MCU
 int sequence_index = 0;
 String current_sequence;
 bool showSequence = true;
-// long int clientPause = 5001;
-bool clientPause = false;
+
+bool wifiConnected = false; 
+unsigned long timeTrack;
 
 struct sequence {
   String title;
@@ -81,21 +79,23 @@ void setup(void) {
   sequenceStart = millis();
   setupWifi();
   dataSetup();
-  server.onNotFound([]() {
-    if (!handleFileRead(server.uri()))
-      server.send(404, "text/plain", "404: Not Found");
-  });
-  server.on("/q", API_query);
-  server.on("/api", API);
-  startWifi();
+  if (wifiConnected) {
+    server.onNotFound([]() {
+      if (!handleFileRead(server.uri()))
+        server.send(404, "text/plain", "404: Not Found");
+    });
+    server.on("/q", API_query);
+    server.on("/api", API);
+    startWifi();
+  }
 }
 
 void loop(void) {
-  listenWifi();
-  if (!clientPause) {
-    if (showSequence) {
-      sequences[sequence_index].go();
-    }
-    checkSequenceChange();
+  if (wifiConnected) {
+    listenWifi();
+  } 
+  if (showSequence) {
+    sequences[sequence_index].go();
   }
+  checkSequenceChange();
 }

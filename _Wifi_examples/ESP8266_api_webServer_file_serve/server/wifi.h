@@ -1,39 +1,54 @@
+#include <ESP8266WebServer.h>
+ESP8266WebServer server(80);
+
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
+#include <ESP8266WiFi.h>
 #include <ESP8266mDNS.h>
-#include <FS.h>  
+#include <FS.h>
 
 #include "arduino_secrets.h"
-const char* ssid = SECRET_SSID;
-const char* password = SECRET_PASS;
+const char* ssid = SECRET_SSID; // found in arduino_secrets.h (.gitignored!)
+const char* password = SECRET_PASS; // found in arduino_secrets.h (.gitignored!)
 
 void setupWifi() {
-  Serial.begin(115200);         
+  Serial.begin(115200);
   delay(10);
   Serial.println('\n');
-  wifiMulti.addAP(SECRET_SSID, SECRET_PASS);   
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
   Serial.println("Connecting ...");
-  int i = 0;
-  while (wifiMulti.run() != WL_CONNECTED) { 
+  long waitForWifi = 20000;
+  long startTime = millis();
+  while ((WiFi.status() != WL_CONNECTED) && (millis() - startTime < waitForWifi)) {
     delay(250);
-    Serial.print('.');
+    String delayed = String(millis() - startTime);
+    Serial.print("Waiting for Wifi ("+String(waitForWifi)); Serial.println(" ms): "+delayed);
   }
-  Serial.println('\n');
-  Serial.print("Connected to ");
-  Serial.println(WiFi.SSID());             
-  Serial.print("IP address:\t");
-  Serial.println(WiFi.localIP());           
-
-  if (MDNS.begin("esp8266")) {              
-    Serial.println("mDNS responder started");
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.print("\nWiFi.status(): ");
+    Serial.println(WiFi.status());
+    /*
+      Doc Reference for status codes...
+      - https://arduino-esp8266.readthedocs.io/en/latest/esp8266wifi/station-class.html?highlight=WiFi.status#status
+      - https://github.com/dlitz/ArduinoCore-esp8266/blob/master/libraries/ESP8266WiFi/src/include/wl_definitions.h
+    */
   } else {
-    Serial.println("Error setting up MDNS responder!");
+    wifiConnected = true;
+    Serial.println("Connected to "); Serial.println(WiFi.SSID());
+    Serial.print("IP address:\t"); Serial.println(WiFi.localIP());
+    if (MDNS.begin("esp8266")) {
+      Serial.println("mDNS responder started");
+    } else {
+      Serial.println("Error setting up MDNS responder!");
+    }
   }
+
 }
 
 void startWifi() {
-  SPIFFS.begin();                           
-  server.begin();                           
+  SPIFFS.begin();
+  server.begin();
   Serial.println("HTTP server started");
 }
 
@@ -62,16 +77,16 @@ String getContentType(String filename) {
   return "text/plain";
 }
 
-bool handleFileRead(String path) { 
+bool handleFileRead(String path) {
   Serial.println("handleFileRead: " + path);
-  if (path.endsWith("/")) path += "index.html";         
-  String contentType = getContentType(path);            
-  if (SPIFFS.exists(path)) {                            
-    File file = SPIFFS.open(path, "r");                 
-    size_t sent = server.streamFile(file, contentType); 
-    file.close();                                       
+  if (path.endsWith("/")) path += "index.html";
+  String contentType = getContentType(path);
+  if (SPIFFS.exists(path)) {
+    File file = SPIFFS.open(path, "r");
+    size_t sent = server.streamFile(file, contentType);
+    file.close();
     return true;
   }
   Serial.println("\tFile Not Found");
-  return false;                                         
+  return false;
 }
