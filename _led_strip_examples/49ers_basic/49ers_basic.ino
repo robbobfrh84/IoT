@@ -1,3 +1,4 @@
+// NOTE: Positive pin uses usb on esp8266. usb pin is 5v. the 3v works, but it's recommened to not use it because it'll only work for a few leds. 
 #include <FastLED.h>
 
 #define LED_PIN     12

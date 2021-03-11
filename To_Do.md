@@ -10,7 +10,8 @@ Misc `Iot`
 
 ----
 Led strip update, cleanup.
-- [ ] put `led_strip_toggler` & `demoReel100` in `/_led_strip_examples`.
+- [x] put `led_strip_toggler` & `demoReel100` in `/_led_strip_examples`.
 - [ ] create a basic example.
+  - [ ] add photo of pins back and front. 
 
 # Down the Road examples...
