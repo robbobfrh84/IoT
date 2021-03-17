@@ -4,7 +4,7 @@
 #define NUM_LEDS    24
 #define BRIGHTNESS  255 // 0-255
 #define LED_TYPE    WS2811
-#define COLOR_ORDER GRB
+#define COLOR_ORDER RGB
 CRGB leds[NUM_LEDS];
 
 int rgb[3][3] = { {255,  0,  0}, {0, 255, 0}, {0, 0, 255} };
