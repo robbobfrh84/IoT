@@ -1,7 +1,7 @@
 #include <FastLED.h>
 
 #define LED_PIN     12
-#define NUM_LEDS    24
+#define NUM_LEDS    1
 #define BRIGHTNESS  255 // 0-255
 #define LED_TYPE    WS2811
 #define COLOR_ORDER RGB
@@ -23,7 +23,7 @@ const int rgb[colors][3] = {
 };
 
 void setup() {
-  Serial.begin(115200);
+  // Serial.begin(115200); // Development only
   delay(3000); // power-up safety delay
   FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
   FastLED.setBrightness(  BRIGHTNESS );
