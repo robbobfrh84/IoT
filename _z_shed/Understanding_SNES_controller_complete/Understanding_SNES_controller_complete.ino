@@ -1,6 +1,7 @@
-int LatchPin  = 8; // Latch
-int ClockPin  = 9; // Clock
-int DataPin   = 10; // Serial Data
+int LatchPin  = 8; // Latch (yellow)
+int ClockPin  = 9; // Clock (blue)
+int DataPin   = 10; // Serial Data (Red)
+// 5v (white), Ground = (brown/black)
 
 unsigned int ControllerData = 0;
 
