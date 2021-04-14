@@ -8,9 +8,9 @@ void setupSnes() {
   pinMode(DataPin,INPUT);
   digitalWrite(LatchPin, HIGH);
   digitalWrite(ClockPin, HIGH);
- }
+}
 
-void controllerRead() {
+String getSnesButton() {
   ControllerData = 0;
   digitalWrite(LatchPin, LOW);
   digitalWrite(ClockPin, HIGH);
@@ -31,10 +31,8 @@ void controllerRead() {
     digitalWrite(ClockPin,HIGH);
   }
   unsigned int ControllerDataShort = ~ControllerData;
-  String btn = getButton(ControllerDataShort);
-  if (btn != "") {
-    Serial.println(btn); 
-  }
+  //String btn = getButton(ControllerDataShort);
+  return getButton(ControllerDataShort);
   delay(10);
 }
 

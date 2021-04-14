@@ -10,5 +10,8 @@ void setup() {
 } 
 
 void loop(){
-  controllerRead();    
+  snes = getSnesButton();
+  if (snes != "") {
+    Serial.println(snes+" Button Pressed"); 
+  }
 }  
