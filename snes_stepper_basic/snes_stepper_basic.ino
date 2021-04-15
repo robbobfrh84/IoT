@@ -1,6 +1,6 @@
 String snes;
-const int snesPins[3] = {8,9,10}; // Latch,Clock,Data (yellow,blue,red) *5v=white,Ground=brown/black
-const int stepperPins[2] = {6,7}; // Direction, Step
+const int snesPins[3] = {2,3,4}; // Latch,Clock,Data (yellow,blue,red) *5v=white,Ground=brown/black
+const int stepperPins[2] = {11,12}; // Direction, Step
 
 const int stepsInRotation = 1600;
 long int stepTracker = 0;
