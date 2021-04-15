@@ -1,6 +1,7 @@
-int LatchPin  = snesPins[0]; // SNES Latch (yellow)
-int ClockPin  = snesPins[1]; // SNES Clock (blue)
-int DataPin   = snesPins[2]; // SNES Serial Data (Red)
+const int LatchPin  = snesPins[0]; // SNES Latch (yellow)
+const int ClockPin  = snesPins[1]; // SNES Clock (blue)
+const int DataPin   = snesPins[2]; // SNES Serial Data (Red)
+unsigned int ControllerData = 0;
 
 void setupSnes() {
   pinMode(LatchPin,OUTPUT);
@@ -31,13 +32,11 @@ String getSnesButton() {
     digitalWrite(ClockPin,HIGH);
   }
   unsigned int ControllerDataShort = ~ControllerData;
-  //String btn = getButton(ControllerDataShort);
   return getButton(ControllerDataShort);
-  delay(10);
 }
 
 
-String getButton(unsigned int code) {
+String getButton(long int code) {
   if (code == 512) { return "LD"; } 
   else if (code == 256) { return "RD"; } 
   else if (code == 2048) { return "UD"; } 
@@ -51,7 +50,7 @@ String getButton(unsigned int code) {
   else if (code == 4096) { return "start"; } 
   else if (code == 8192) { return "select"; }
   else { return ""; }
-}
+} 
 
 
 // Left     = 512
