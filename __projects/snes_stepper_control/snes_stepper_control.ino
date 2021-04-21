@@ -1,6 +1,8 @@
 String snes;
 const int snesPins[3] = {2,3,4}; // Latch,Clock,Data (yellow,blue,red) *5v=white,Ground=brown/black
-const int stepperPins[2] = {11,12}; // Direction, Step
+const int stepperPinsX[2] = {7,8}; // Direction, Step
+const int stepperPinsY[2] = {9,10}; // Direction, Step
+const int stepperPinsZ[2] = {11,12}; // Direction, Step
 
 const int stepsInRotation = 1600;
 long int stepTracker = 0;
@@ -29,12 +31,32 @@ void loop(){
 void handleButtonsPressed(String btn) {
   if (btn == "L") {
     const int moveSteps = 8*fullSteps;
-    stepper(moveSteps, LOW, speeds[speedSet]);
+    stepper(moveSteps, LOW, speeds[speedSet], stepperPinsX);
     stepTracker -= 8*fullSteps;
     fullSteps = 1;
   } else if (btn == "R") {
     const int moveSteps = 8*fullSteps;
-    stepper(moveSteps, HIGH, speeds[speedSet]);
+    stepper(moveSteps, HIGH, speeds[speedSet], stepperPinsX);
+    stepTracker += 8*fullSteps;
+    fullSteps = 1;
+  } else if (btn == "D") {
+    const int moveSteps = 8*fullSteps;
+    stepper(moveSteps, LOW, speeds[speedSet], stepperPinsY);
+    stepTracker -= 8*fullSteps;
+    fullSteps = 1;
+  } else if (btn == "U") {
+    const int moveSteps = 8*fullSteps;
+    stepper(moveSteps, HIGH, speeds[speedSet], stepperPinsY);
+    stepTracker += 8*fullSteps;
+    fullSteps = 1;
+  } else if (btn == "T") {
+    const int moveSteps = 8*fullSteps;
+    stepper(moveSteps, LOW, speeds[speedSet], stepperPinsZ);
+    stepTracker -= 8*fullSteps;
+    fullSteps = 1;
+  } else if (btn == "P") {
+    const int moveSteps = 8*fullSteps;
+    stepper(moveSteps, HIGH, speeds[speedSet], stepperPinsZ);
     stepTracker += 8*fullSteps;
     fullSteps = 1;
   } else if (btn == "B") {
