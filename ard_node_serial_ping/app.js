@@ -1,7 +1,9 @@
 const SerialPort = require('serialport')
 const Readline = require('@serialport/parser-readline')
 
-const port = new SerialPort('/dev/cu.usbmodem14201', {
+// const port = new SerialPort('/dev/cu.usbmodem14201', { // MAC
+const port = new SerialPort('/dev/ttyACM0', { // PI
+
   baudRate: 115200
 })
 
