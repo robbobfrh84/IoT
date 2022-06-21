@@ -9,8 +9,8 @@
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 WiFiClient client;
 
-static char ssid[] = "dummy";  
-static char pass[] = "dummy";
+static char ssid[] = "Earth to Bob";  
+static char pass[] = "lordofthedance";
 
 int keyIndex = 0;
 int status = WL_IDLE_STATUS;
