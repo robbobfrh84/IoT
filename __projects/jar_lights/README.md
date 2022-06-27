@@ -1,14 +1,16 @@
 # Interactive Jar Lights with client server
 
 WARNING: if you're running this sketch without the pins hooked up, it will behave very oddly. One major factor is the input pin, which will hog up the process due to the fact that it will trigger True without being hooked up, while false is the default state when it is hooked up!
-- The sketch will run, but the wifi will be really buggy and slow. 
+- The sketch will run, but the wifi will be really buggy and slow.
 
-### Data to config
+### Data to config for new wifi setup!
 
 Wifi settings.
 - SERVER: You may not have `arduino_secrets.h` in the server folder and need to create one using the `arduino_secrets_template.h` with you wifi name and password.
 Update your microcontroller's designated url on your network.
 - CLIENT: In the `data` folder, find the `js` folder. There, open `the index.js` and update the `const url = "http://192.168.1.140";` file to match your devices url.
+  - WARNING! to upload client-side code... this is different than uploading a sketch
+  - With the Arduino IDE open > Tools > **ESP8266 Sketch Data Upload**
 - Note: you can get your url by running the Arduino script with the serial monitor open to see the url print.
 
 ### Known issues/ fixes /features.

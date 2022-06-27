@@ -1,4 +1,4 @@
-const url = "http://192.168.1.123";
+const url = "http://10.0.0.151";
 let inverted = true
 let pairDir = inverted ? -1 : 1
 let data = {}
@@ -36,6 +36,7 @@ const cols = {
 let selectedRGB = cols.cornflowerblue
 
 window.onload = ()=>{
+  console.log('OK! Here we go 🚀')
   invertedInput.checked = inverted;
   buildColorAdj()
   updateSelectedColor()

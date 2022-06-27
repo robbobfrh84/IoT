@@ -2,15 +2,15 @@
 #ifdef __AVR__
 #include <avr/power.h>
 #endif
-#define PIN            12
+#define PIN            6
 #define NUMPIXELS      64
 #include <SPI.h>
 #include <WiFi101.h>
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 WiFiClient client;
 
-static char ssid[] = "Earth to Bob";  
-static char pass[] = "lordofthedance";
+static char ssid[] = "dummy";  
+static char pass[] = "dummy";
 
 int keyIndex = 0;
 int status = WL_IDLE_STATUS;
