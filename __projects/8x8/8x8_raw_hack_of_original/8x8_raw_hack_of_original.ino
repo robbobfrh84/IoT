@@ -47,7 +47,7 @@ void setup(){
   #if defined (__AVR_ATtiny85__)
   if (F_CPU == 16000000) clock_prescale_set(clock_div_1);
   #endif
-  pinMode(6, OUTPUT);
+  pinMode(PIN, OUTPUT);
   pixels.begin();
   while ( status != WL_CONNECTED) {
     Serial.print("Attempting connect to SSID..."); 
