@@ -4,8 +4,10 @@ bool wifiConnected = false;
 void setup(void) {
   Serial.begin(115200);
   pinMode(12, INPUT);
-  pinMode(13, OUTPUT);
-  pinMode(15, OUTPUT);
+  pinMode(0, OUTPUT);
+  pinMode(2, OUTPUT);
+  digitalWrite(0, true);
+  digitalWrite(2, true);
   setupWifi();
   if (wifiConnected) {
     server.onNotFound([]() {                              

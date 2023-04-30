@@ -3,6 +3,11 @@
 
 ### March 11th, 2021
 
+Check for visible passwords
+- [x] Review wifi examples, makes sure none show your password/wifi etc...
+  - looking in the actual repo after 👆big push should make it easy to see if they exist
+  - also searh the id/pass variable throughout the Iot repo...
+
 update Jar_lights
 - [x] Fix slow request issue.
 - [x] let's just do the normal static wifi & password.

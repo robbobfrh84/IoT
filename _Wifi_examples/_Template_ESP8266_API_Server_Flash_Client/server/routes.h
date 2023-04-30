@@ -1,7 +1,7 @@
 #include <ArduinoJson.h>
 DynamicJsonDocument json(512);
 DynamicJsonDocument bodyJson(512);
-#include "wifi.h"; 
+#include "wifi.h";
 
 void API_query() {
   setCrossOrigin();
@@ -14,12 +14,12 @@ void API_query() {
     String line = server.arg(i);
     int split = line.indexOf(",");
     
-    if (server.argName(i) == "DW") {
+    if (server.argName(i) == "W") {
       String key = line.substring(0, split);
       String value = line.substring(split+1, line.length() );
-      digitalWrite(key.toInt(), value.toInt());
+      digitalWrite(key.toInt(), !value.toInt()); // 👀 BUILT IN ADAFRUIT HUZZAH ESP8266 are inverted for whatever reason? 
     }
-    if (server.argName(i) == "DR") {
+    if (server.argName(i) == "R") {
       int key = server.arg(i).toInt();
       data[server.arg(i)] = digitalRead(key);
     }

@@ -2,16 +2,18 @@
 
 # To Do 🔥
 
-Misc `Iot`
-- [x] Review wifi examples, makes sure none show your password/wifi etc...
-  - looking in the actual repo after 👆big push should make it easy to see if they exist
-  - also searh the id/pass variable throughout the Iot repo...
-- [ ] After 8x8 update. Push all here and update Iot on Pi.
+- [✅] cleanup repo docs / reorg 
 
-----
-Led strip update, cleanup.
-- [x] put `led_strip_toggler` & `demoReel100` in `/_led_strip_examples`.
-- [ ] create a basic example.
-  - [ ] add photo of pins back and front. 
+- [🟡] Adding `_Template_ESP8266_API_Server_Flash_Client`
+  - [ ] update secrets file and `arduino_secrets_template` to include vars needed
+
+- [ ] Updating Jar Lights to include Static Wifi.
+  - [ ] update secrets file and `arduino_secrets_template` to include vars needed
+
+~~~~
+- [ ] Multi wifi with automatic "strongest" connection.
+- [ ] No wifi found?, create Access Point too add wifi info to memory
+  - Possible to do both??? Because what if there's a connection that "sucks" blocking?
+- [ ] Combine Multi wifi with Access Point Wifi Adder
 
 # Down the Road examples...

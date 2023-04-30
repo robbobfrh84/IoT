@@ -1,6 +1,7 @@
-const query = function(queryString) {
-  console.log('queryString: ', queryString)
-  fetch('http://192.168.1.126/q?'+queryString)
+const queryString = function(queryString) {
+  const url = IP_address+'/q?'+queryString
+  console.log('url request: ', url)
+  fetch(url)
     .then(res => res.json())
     .then(data => {
       console.log('response data: ', data)

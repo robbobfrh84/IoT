@@ -11,12 +11,22 @@ ESP8266WebServer server(80);
 const char* ssid = SECRET_SSID; // found in arduino_secrets.h (.gitignored!)
 const char* password = SECRET_PASS; // found in arduino_secrets.h (.gitignored!)
 
+IPAddress local_IP(10, 0, 0, 100); // Xfinity Router
+// IPAddress local_IP(172, 23, 9, 100); // Generic Router
+IPAddress gateway(10, 0, 0, 1); // Xfinity
+// IPAddress gateway(172, 23, 8, 1); // Generic format example (will very, router to router - need to get netwok default ip address.
+IPAddress subnet(255, 255, 0, 0);
+
 void setupWifi() {
+  if (!WiFi.config(local_IP, gateway, subnet)) {
+    Serial.println("STA Failed to configure");
+  }
   Serial.begin(115200);
   delay(10);
   Serial.println('\n');
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
+  
   Serial.println("Connecting ...");
   long waitForWifi = 20000;
   long startTime = millis();
