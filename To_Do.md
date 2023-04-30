@@ -11,6 +11,7 @@
   - [ ] update secrets file and `arduino_secrets_template` to include vars needed
 
 ~~~~
+- [ ] Connect to Iphone hotspot (I remember trying and not working before.....)
 - [ ] Multi wifi with automatic "strongest" connection.
 - [ ] No wifi found?, create Access Point too add wifi info to memory
   - Possible to do both??? Because what if there's a connection that "sucks" blocking?
