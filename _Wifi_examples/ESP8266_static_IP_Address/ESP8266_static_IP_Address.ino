@@ -1,6 +1,3 @@
-//Resources: https://circuits4you.com/2016/12/16/esp8266-web-server-html/
-//- https://randomnerdtutorials.com/esp8266-nodemcu-static-fixed-ip-address-arduino/
-
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
@@ -8,21 +5,15 @@
 
 #include "arduino_secrets.h" 
 
-const char* ssid = SECRET_SSID;
-const char* password = SECRET_PASS;
-
-ESP8266WebServer server(80);
-
-// Set your Static IP address
-//IPAddress local_IP(10, 0, 0, 100); // Xfinity Router
-IPAddress local_IP(172, 23, 9, 100); // Generic Router
-// Set your Gateway IP address 
-//IPAddress gateway(10, 0, 0, 1); // Xfinity
-IPAddress gateway(172, 23, 8, 1); // Generic format example (will very, router to router - need to get netwok default ip address.
-
-IPAddress subnet(255, 255, 0, 0);
+const char* ssid = SECRET_SSID; // found in arduino_secrets.h (.gitignored!). But should have arduino_secrets_template.h 
+const char* password = SECRET_PASS;// found in arduino_secrets.h (.gitignored!). But should have arduino_secrets_template.h 
+IPAddress local_IP(IP_A[0], IP_A[1], IP_A[2], IP_A[3]); 
+IPAddress gateway(IP_G[0], IP_G[1], IP_G[2], IP_G[3]); 
+IPAddress subnet(IP_S[0], IP_S[1], IP_S[2], IP_S[3]);
 IPAddress primaryDNS(8, 8, 8, 8);   //optional
 IPAddress secondaryDNS(8, 8, 4, 4); //optional
+
+ESP8266WebServer server(80);
 
 const int led = 2;
 

@@ -12,6 +12,7 @@ void setup() {
     Serial.print("File Name: "); Serial.println(dir.fileName ());
     Serial.print("File Size: "); Serial.println(dir.fileSize ());
   }
+  Serial.println("* Reset to re-run sketch");
 }
 
-void loop(){ delay(5000); Serial.println("* Reset to rerun sketch"); }
+void loop(){ }

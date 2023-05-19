@@ -16,6 +16,7 @@ void setup() {
     } 
     file.close();
   }
+  Serial.println("* Reset to re-run sketch");
 }
 
-void loop(){ delay(5000); Serial.println(" * Reset to rerun sketch"); }
+void loop(){ }

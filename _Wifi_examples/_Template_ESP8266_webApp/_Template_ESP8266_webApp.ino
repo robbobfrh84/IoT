@@ -9,7 +9,7 @@ void setup(void) {
   digitalWrite(0, true);
   digitalWrite(2, true);
   setupWifi();
-  if (wifiConnected) {
+  if (wifiConnected) { // 🔥 Shouldn't this just be in wifi? 
     server.onNotFound([]() {                              
       if (!handleFileRead(server.uri()))                  
         server.send(404, "text/plain", "404: Not Found"); 
