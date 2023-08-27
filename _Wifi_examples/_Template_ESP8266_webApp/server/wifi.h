@@ -1,23 +1,14 @@
-#include <ESP8266WebServer.h>
-ESP8266WebServer server(80);
-
-#include <ESP8266WiFi.h>
-#include <WiFiClient.h>
-#include <ESP8266mDNS.h>
-#include <FS.h>
-
-#include "arduino_secrets.h"
-const char* ssid = SECRET_SSID; // found in arduino_secrets.h (.gitignored!). But should have arduino_secrets_template.h 
-const char* password = SECRET_PASS;// found in arduino_secrets.h (.gitignored!). But should have arduino_secrets_template.h 
-IPAddress local_IP(IP_A[0], IP_A[1], IP_A[2], IP_A[3]); 
-IPAddress gateway(IP_G[0], IP_G[1], IP_G[2], IP_G[3]); 
-IPAddress subnet(IP_S[0], IP_S[1], IP_S[2], IP_S[3]);
-
 void setupWifi() {
+  const char* ssid = wifiJSON["name"]; 
+  const char* password = wifiJSON["pass"];
+  IPAddress local_IP(wifiJSON["ip"][0], wifiJSON["ip"][1], wifiJSON["ip"][2], wifiJSON["ip"][3]); 
+  IPAddress gateway(wifiJSON["gateway"][0], wifiJSON["gateway"][1], wifiJSON["gateway"][2], wifiJSON["gateway"][3]); 
+  IPAddress subnet(wifiJSON["subnet"][0], wifiJSON["subnet"][1], wifiJSON["subnet"][2], wifiJSON["subnet"][3]);
+
   if (!WiFi.config(local_IP, gateway, subnet)) {
     Serial.println("STA Failed to configure");
   }
-  Serial.begin(115200);
+
   delay(10);
   Serial.println('\n');
   WiFi.mode(WIFI_STA);
@@ -33,12 +24,7 @@ void setupWifi() {
   }
   if (WiFi.status() != WL_CONNECTED) {
     Serial.print("\nWiFi.status(): ");
-    Serial.println(WiFi.status());
-    /*
-      Doc Reference for status codes...
-      - https://arduino-esp8266.readthedocs.io/en/latest/esp8266wifi/station-class.html?highlight=WiFi.status#status
-      - https://github.com/dlitz/ArduinoCore-esp8266/blob/master/libraries/ESP8266WiFi/src/include/wl_definitions.h
-    */
+    Serial.println(WiFi.status()); // * see readme for status code docs
   } else {
     wifiConnected = true;
     Serial.println("Connected to "); Serial.println(WiFi.SSID());
@@ -49,50 +35,21 @@ void setupWifi() {
       Serial.println("Error setting up MDNS responder!");
     }
   }
-
 }
 
 void startWifi() {
-  SPIFFS.begin();
-  server.begin();
-  Serial.println("HTTP server started");
+  if (wifiConnected) { 
+    server.onNotFound([]() { // * serve default /index.html page.                      
+      if (!handleFileRead(server.uri())) {
+        server.send(404, "text/plain", "404: Not Found"); 
+      }               
+    });
+    server.on("/q", API_query); 
+    server.begin();
+    Serial.println("HTTP server started");
+  }
 }
 
 void listenWifi(void) {
   server.handleClient();
-}
-
-void buf(DynamicJsonDocument obj) {
-  String bufs;
-  serializeJson(obj, bufs);
-  server.send(200, "application/json", bufs);
-}
-
-void setCrossOrigin(){
-  server.sendHeader(F("Access-Control-Allow-Origin"), F("*"));
-  server.sendHeader(F("Access-Control-Max-Age"), F("600"));
-  server.sendHeader(F("Access-Control-Allow-Methods"), F("PUT,POST,GET,OPTIONS"));
-  server.sendHeader(F("Access-Control-Allow-Headers"), F("*"));
-};
-
-String getContentType(String filename) {
-  if (filename.endsWith(".html")) return "text/html";
-  else if (filename.endsWith(".css")) return "text/css";
-  else if (filename.endsWith(".js")) return "application/javascript";
-  else if (filename.endsWith(".ico")) return "image/x-icon";
-  return "text/plain";
-}
-
-bool handleFileRead(String path) {
-  Serial.println("handleFileRead: " + path);
-  if (path.endsWith("/")) path += "index.html";
-  String contentType = getContentType(path);
-  if (SPIFFS.exists(path)) {
-    File file = SPIFFS.open(path, "r");
-    size_t sent = server.streamFile(file, contentType);
-    file.close();
-    return true;
-  }
-  Serial.println("\tFile Not Found");
-  return false;
 }

@@ -101,3 +101,5 @@ Wifi Status Codes:
 ### Why not Using wifiMult Id / Pass ?
 Most examples I looked at for this used WifiMulti. Which I didn't like because it made it really difficult to debug when using multiple wifi points. You can't see what's saved, what's priority and It could connect to something you didn't want if more than 1 was available. SO, instead I used just the regular wifi with single hardcoded id/pass.
 
+### Working, BUT Just getting a BLANK WEBPAGE?
+- You forgot to flash the `/data`

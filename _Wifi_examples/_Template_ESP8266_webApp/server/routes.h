@@ -1,8 +1,3 @@
-#include <ArduinoJson.h>
-DynamicJsonDocument json(512);
-DynamicJsonDocument bodyJson(512);
-#include "wifi.h";
-
 void API_query() {
   setCrossOrigin();
   DynamicJsonDocument data(512); 
@@ -28,7 +23,8 @@ void API_query() {
   }; 
 
   buf(data);
-};
+}
+
 
 
 

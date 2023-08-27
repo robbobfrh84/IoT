@@ -1,0 +1,7 @@
+{
+  "name": "Earth to Bob",
+  "pass": "lordofthedance",
+  "ip": [10, 0, 0, 100],
+  "gateway": [10, 0, 0, 1],
+  "subnet": [255, 255, 0, 0]
+}

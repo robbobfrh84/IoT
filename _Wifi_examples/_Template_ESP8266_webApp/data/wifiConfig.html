@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang='en'>
+<title>WiFi Configure for "ESP8266 WebApp"</title>
+<head>
+  <meta charset='UTF-8'><meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+</head>
+<body>
+
+  <h1>WiFi Configure for "ESP8266 WebApp"</h1>
+
+  <h3>Router Network</h3>
+  <table>
+    <tr><td>Name:</td><td><input id='router_name'></td></tr>
+    <tr><td>Pass: </td><td><input id='router_pass'></td></tr>
+    <tr><td>IP Address: </td><td><input id='router_ip'></td></tr>
+    <tr><td>Gatway Address: </td><td><input id='router_gateway'></td></tr>
+    <tr><td>Subnet Address: </td><td><input id='router_subnet'></td></tr>
+  </table>
+
+  <br><button onclick="click_saveWifiConfig()">Save</button>
+
+  <hr>
+
+  <h3>Info🔥(todo)</h3>
+
+  <li>This page is served at <span id="urlAddress">/wifiConfig.html</span></li>
+  <li>Note: If served from an "Access Point": the address will be different than if served from a router.</li>
+
+
+  <script type='text/javascript' src='js/app.js'></script>
+  <script>
+
+    const IP_address = location.origin
+
+    getWifiConfig((data)=>{
+      console.log('data:',data)
+      for (name in data) {
+        window["router_"+name].value = data[name]
+      }
+    })
+
+    const click_saveWifiConfig = function() {
+      console.log("click_saveWifiConfig > TO DO 🔥")
+      // saveWifiConfig((data)=>{
+      //   console.log('data:',data)
+      // })
+    }
+
+  </script>
+</body>
+</html>

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang='en'>
-<title> ESP8266 API Server & Flash Client </title>
-<link rel='icon' href='https://raw.githubusercontent.com/robbobfrh84/drive/master/images/SystemIcons-Images/code.png?token=ADYWSUWL4GA3YTJRHIZRTHK7RGREU'>
+<title> ESP8266 WebApp </title>
 <head>
   <meta charset='UTF-8'><meta http-equiv='X-UA-Compatible' content='ie=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
@@ -9,7 +8,7 @@
 </head>
 <body>
 
-  <h1> ESP8266 API Server & Flash Client </h1>
+  <h1> ESP8266 WebApp </h1>
   <input type='checkbox' id='led0' onclick='ledToggle(0)'> LED 0 state (Red)
   </br>
   <input type='checkbox' id='led2' onclick='ledToggle(2)'> LED 2 state (Blue)
@@ -22,15 +21,27 @@
 
     const IP_address = location.origin
 
+    queryString('R=0&R=2&R=12', (data)=>{
+      console.log('data:',data)
+    })
+
     setInterval(()=>{
-      queryString('R=12') // DigitalRead output pin #12 state
+      queryString('R=12',(data)=>{
+        if (data[12] == 1) {
+          btn.innerHTML = "<br>Button<br>!PRESSED!"
+        } else {
+          btn.innerHTML = "<br>Button not pressed"
+        }
+      }) 
     },1000)
 
-    ledToggle = (pin)=>{
+    const ledToggle = function(pin) {
       queryString(
         'W='+pin+','+(window["led"+pin].checked ? '1' : '0') // DigitalWrite output pin #12 HIGH
         +'&R=12' // DigitalRead output pin #2 state
-      )
+      , (data)=>{
+        console.log('data:',data)
+      })
     }
 
   </script>

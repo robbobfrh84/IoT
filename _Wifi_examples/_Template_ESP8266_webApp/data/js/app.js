@@ -1,15 +1,18 @@
-const queryString = function(queryString) {
-  const url = IP_address+'/q?'+queryString
-  console.log('url request: ', url)
-  fetch(url)
+const queryString = function(queryString, callback) {
+  fetch(IP_address+'/q?'+queryString)
     .then(res => res.json())
     .then(data => {
-      console.log('response data: ', data)
-      if (data[12] == 1) {
-        btn.innerHTML = "<br>Button<br>!PRESSED!"
-      } else {
-        btn.innerHTML = "<br>Button not pressed"
-      }
+      if (callback) { callback(data) }
     })
 }
+
+const getWifiConfig = function(callback) {
+  // 🔥 Maybe this should be a reg request? it won't work on none-served local file:///...
+  fetch(IP_address+'/wifiConfig.json')
+    .then(res => res.json())
+    .then(data => {
+      if (callback) { callback(data) }
+    })
+}
+
 

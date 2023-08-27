@@ -6,7 +6,7 @@
 - ✅ Create `ESP8266_accesPoint`
 - ✅ Update `ESP8266_server` to include iphone hotspot guide.
 - ✅ Create `ESP8266_wifiScan` simple copy paste from example. just add a default readme.
-- 🟡 Move notes from fallback example - remove folder - push changes!
+- ✅ Move notes from fallback example - remove folder - push changes!
 - 🟡 Update `_Template_ESP8266_webApp`...
   - ✅ Add Static Wifi
   - 🟡 Add AccessPoint fallback
@@ -19,13 +19,15 @@
 
 
 ### Next to explore
-- [ ] No wifi found?, fallback to Access Point too add wifi info to memory
-  - You'll first need to figure out how to add stuff to memory manually. 
+ESP8266
+- 🟡 No wifi found?, fallback to Access Point too add wifi info to memory
   - Update in > `_Template_ESP8266_webApp`
-- [ ] http "Open" connection between client / server ? Would remove the 1 sec callback... 
-  - Update in > `_Template_ESP8266_webApp`
-- [ ] Connect to Iphone hotspot ? 
-  - New example? Or, just add to `_Template_ESP8266_webApp`
+
+ESP8266 Wifi / Template stuff...
+- [ ] http "Open" connection between client / server ? Would remove the 1 sec. callback... 
+  - ? Update in > `_Template_ESP8266_webApp` ?
+    - Consider this as an option because you may NOT want to drain the batt. that way. BUT, after you do this maybe you realize it isn't going to work that way,,, idk...
+    - Looks like what you're looking for :) > https://randomnerdtutorials.com/esp8266-nodemcu-web-server-sent-events-sse/
 - [ ] New Example for Multi wifi with automatic "strongest" connection ?
   - I *don't* wanna add this to the template because it kinda gives up control. 
 
