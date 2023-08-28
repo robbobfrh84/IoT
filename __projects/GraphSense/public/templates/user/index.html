@@ -1,0 +1,522 @@
+<!-- first section - Home -->
+<div id="home" class="home">
+  <div class="text-vcenter">
+    <h2>I <i class="glyphicon glyphicon-heart"></i> sensors <i class="glyphicon glyphicon-plus"></i> data!</h2>
+    <a href="#about" class="btn btn-default btn-lg">Get C++ Code!</a>
+  </div>
+</div>
+<!-- /first section -->
+
+<!-- second section - About -->
+<div id="about" class="pad-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h3>Click on one of the sections below to get started with your C++ Arduino code.</h3>
+        <p class="lead">We're currently serving the following sensors: Audio, Temperature, Atmospheric Pressure and Light</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /second section -->
+
+<!-- third section - Services -->
+<div id="services" class="pad-section">
+  <div class="container">
+    <h3 class="text-center">+Our Sensors+</h3> <hr />
+    <div class="row text-center">
+
+
+      <div class="col-sm-3 col-xs-12">
+        <button class="btn btn-primary glyphicon glyphicon-cloud" data-toggle="modal" data-target="#largeModal1"></button>
+        <h4>Atmospheric Pressure</h4>
+        <p>Click the cloud</p>
+        <!-- Large modal -->
+        <div id="largeModal1" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <a href="file:///Users/emilymoses/Code/GraphSense/public/templates/user/pressure_sensor_code.ino" download> ⇩ </a>
+                      <span id="modal-text" class="modal-title">Atmospheric Pressure Sensor C++ Code</span>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      <p>
+                        /****************************************<br>
+                        Example Pressure Level Sketch for the<br>
+                        Adafruit Pressure Sensor<br>
+                        ****************************************/<br>
+                        #include < WiFi101.h > <br>
+<br>
+                        static char ssid[] = "YOUR WIFI SSID";<br>
+                        static char password[] = "YOUR WIFI PASSWORD";<br>
+                        int keyIndex = 0;<br>
+                        int status = WL_IDLE_STATUS;<br>
+                        const char server[] = "pubsub.pubnub.com";<br>
+                        WiFiClient client;<br>
+<br>
+                        int pressure = A0;<br>
+                        int delayTime = 5000;<br>
+<br>
+                        const int sampleWindow = 50; // Sample window width in mS (50 mS = 20Hz)<br>
+                        unsigned int sample;<br>
+<br>
+                        void setup() {<br>
+                           Serial.begin(115200);<br>
+                           delay(10);<br>
+                           pinMode(audio, INPUT);<br>
+<br>
+                           while (status != WL_CONNECTED) {<br>
+                            Serial.print("Attempting to conenct to SSID: ");<br>
+                            Serial.println(ssid);<br>
+                            status = WiFi.begin(ssid, password);<br>
+                            delay(10000);<br>
+                           }<br>
+                           printWifiStatus();<br>
+                        }<br>
+<br>
+
+                        void loop() {<br>
+                           unsigned long startMillis= millis();  // Start of sample window<br>
+                           unsigned int peakToPeak = 0;   // peak-to-peak level<br>
+<br>
+                           unsigned int signalMax = 0;<br>
+                           unsigned int signalMin = 1024;<br>
+<br>
+                           // collect data for 50 mS<br>
+                           while (millis() - startMillis < sampleWindow)<br>
+                           {<br>
+                              sample = analogRead(0);<br>
+                              if (sample < 1024)  // toss out spurious readings<br>
+                              {<br>
+                                 if (sample > signalMax)<br>
+                                 {<br>
+                                    signalMax = sample;  // save just the max levels<br>
+                                 }<br>
+                                 else if (sample < signalMin)<br>
+                                 {<br>
+                                    signalMin = sample;  // save just the min levels<br>
+                                 }<br>
+                              }<br>
+                           }<br>
+                           peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude<br>
+                           double volts = (peakToPeak * 3.3) / 1024;  // convert to volts<br>
+                           int audio = volts * 100;<br>
+<br>
+                           Serial.println(audio);<br>
+<br>
+                            String audioToPubnub = String(audio);<br>
+                            client.stop();<br>
+                             if(client.connect(server, 80)) {<br>
+                              client.println("GET /publish/pub-c-a3ff103c-13da-40f7-9134-45670c77ae43/sub-c-8740379a-1fcd-11e6-8b91-02ee2ddab7fe/0/test/0/%7B%22audio%22%3A"+audioToPubnub+"%7D HTTP/1.1");<br>
+                              client.println("Host: pubsub.pubnub.com");<br>
+                              client.println("User-Agent: ArduinoWiFi/1.1");<br>
+                              client.println("Connection: close");<br>
+                              client.println();<br>
+                             } else {<br>
+                              Serial.println("Connection failed!");<br>
+                             }<br>
+                           delay(500);<br>
+                        }<br>
+<br>
+                          void printWifiStatus(){<br>
+                            Serial.print("SSID: ");<br>
+                            Serial.print(WiFi.SSID());<br>
+                            IPAddress ip = WiFi.localIP();<br>
+                            Serial.print("IP Address: ");<br>
+                            Serial.println(ip);<br>
+                            long rssi = WiFi.RSSI();<br>
+                            Serial.print("signal strength (RSSI):");<br>
+                            Serial.print(rssi);<br>
+                            Serial.println(" dBm");<br>
+                          }<br>
+                      </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+      <div class="col-sm-3 col-xs-12">
+        <button class="btn btn-primary glyphicon glyphicon-leaf" data-toggle="modal" data-target="#largeModal2"></button>
+        <h4>Temperature</h4>
+        <p>Click the leaf</p>
+        <!-- Large modal -->
+        <div id="largeModal2" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <a href="file:///Users/emilymoses/Code/GraphSense/public/templates/user/pressure_sensor_code.ino" download> ⇩ </a>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <span id="modal-text" class="modal-title">Temperature Sensor C++ Code</span>
+                    </div>
+                    <div class="modal-body">
+                      <p>
+                        /****************************************<br>
+                        Example Temperature Level Sketch for the<br>
+                        Adafruit Temperature Sensor<br>
+                        ****************************************/<br>
+                        #include < WiFi101.h > <br>
+<br>
+                        static char ssid[] = "YOUR WIFI SSID";<br>
+                        static char password[] = "YOUR WIFI PASSWORD";<br>
+                        int keyIndex = 0;<br>
+                        int status = WL_IDLE_STATUS;<br>
+                        const char server[] = "pubsub.pubnub.com";<br>
+                        WiFiClient client;<br>
+<br>
+                        int temp = A0;<br>
+                        int delayTime = 5000;<br>
+<br>
+                        const int sampleWindow = 50; // Sample window width in mS (50 mS = 20Hz)<br>
+                        unsigned int sample;<br>
+<br>
+                        void setup() {<br>
+                           Serial.begin(115200);<br>
+                           delay(10);<br>
+                           pinMode(audio, INPUT);<br>
+<br>
+                           while (status != WL_CONNECTED) {<br>
+                            Serial.print("Attempting to conenct to SSID: ");<br>
+                            Serial.println(ssid);<br>
+                            status = WiFi.begin(ssid, password);<br>
+                            delay(10000);<br>
+                           }<br>
+                           printWifiStatus();<br>
+                        }<br>
+<br>
+
+                        void loop() {<br>
+                           unsigned long startMillis= millis();  // Start of sample window<br>
+                           unsigned int peakToPeak = 0;   // peak-to-peak level<br>
+<br>
+                           unsigned int signalMax = 0;<br>
+                           unsigned int signalMin = 1024;<br>
+<br>
+                           // collect data for 50 mS<br>
+                           while (millis() - startMillis < sampleWindow)<br>
+                           {<br>
+                              sample = analogRead(0);<br>
+                              if (sample < 1024)  // toss out spurious readings<br>
+                              {<br>
+                                 if (sample > signalMax)<br>
+                                 {<br>
+                                    signalMax = sample;  // save just the max levels<br>
+                                 }<br>
+                                 else if (sample < signalMin)<br>
+                                 {<br>
+                                    signalMin = sample;  // save just the min levels<br>
+                                 }<br>
+                              }<br>
+                           }<br>
+                           peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude<br>
+                           double volts = (peakToPeak * 3.3) / 1024;  // convert to volts<br>
+                           int audio = volts * 100;<br>
+<br>
+                           Serial.println(audio);<br>
+<br>
+                            String audioToPubnub = String(audio);<br>
+                            client.stop();<br>
+                             if(client.connect(server, 80)) {<br>
+                              client.println("GET /publish/pub-c-a3ff103c-13da-40f7-9134-45670c77ae43/sub-c-8740379a-1fcd-11e6-8b91-02ee2ddab7fe/0/test/0/%7B%22audio%22%3A"+audioToPubnub+"%7D HTTP/1.1");<br>
+                              client.println("Host: pubsub.pubnub.com");<br>
+                              client.println("User-Agent: ArduinoWiFi/1.1");<br>
+                              client.println("Connection: close");<br>
+                              client.println();<br>
+                             } else {<br>
+                              Serial.println("Connection failed!");<br>
+                             }<br>
+                           delay(500);<br>
+                        }<br>
+<br>
+                          void printWifiStatus(){<br>
+                            Serial.print("SSID: ");<br>
+                            Serial.print(WiFi.SSID());<br>
+                            IPAddress ip = WiFi.localIP();<br>
+                            Serial.print("IP Address: ");<br>
+                            Serial.println(ip);<br>
+                            long rssi = WiFi.RSSI();<br>
+                            Serial.print("signal strength (RSSI):");<br>
+                            Serial.print(rssi);<br>
+                            Serial.println(" dBm");<br>
+                          }<br>
+                      </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+      <div class="col-sm-3 col-xs-12">
+        <button class="btn btn-primary glyphicon glyphicon-flash" data-toggle="modal" data-target="#largeModal3"></button>
+        <h4>Light</h4>
+        <p>Click the lightning bolt</p>
+        <!-- Large modal -->
+        <div id="largeModal3" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <a href="file:///Users/emilymoses/Code/GraphSense/public/templates/user/pressure_sensor_code.ino" download> ⇩ </a>
+                      <span id="modal-text" class="modal-title">Light Sensor C++ Code</span>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      <p>
+                        /****************************************<br>
+                        Example Light Level Sketch for the<br>
+                        Adafruit Light Sensor<br>
+                        ****************************************/<br>
+                        #include < WiFi101.h ><br>
+<br>
+                        //vvvvvvvvvv- Wifi declarations -vvvvvvvvvv//<br>
+                        const char* ssid = "YOUR WIFI SSID";<br>
+                        const char* password = "YOUR WIFI PASSWORD";<br>
+                        int status = WL_IDLE_STATUS;<br>
+                        WiFiClient client;<br>
+<br>
+                        //vvvvvvvvvv- Project variables -vvvvvvvvvv//<br>
+                        const char server[] = "pubsub.pubnub.com";<br>
+                        int light = A0;<br>
+                        int delayTime = 90000;<br>
+<br>
+                        void setup() {<br>
+                          Serial.begin(9600);<br>
+                          delay(10);<br>
+                          pinMode(light, INPUT);<br>
+<br>
+                          while (status != WL_CONNECTED) { // Connect to WiFi network<br>
+                            Serial.print("Attempting to connect to SSID: ");<br>
+                            Serial.println(ssid);<br>
+                            status = WiFi.begin(ssid, password);<br>
+                            delay(10000);<br>
+                          }<br>
+                          printWifiStatus();<br>
+                        }<br>
+                        //----------------------------------------------------------------//<br>
+                        //----------                 VOID LOOP                  ----------//<br>
+                        //----------------------------------------------------------------//<br>
+                        void loop() {<br>
+                          int lightData = analogRead(light);<br>
+                          Serial.print("Sensor read Value: ");Serial.println(lightData);<br>
+                          String l = String(lightData);<br>
+                          client.stop();<br>
+                          if (client.connect(server, 80)) {<br>
+                            client.println("GET /publish/pub-c-d9caecb5-0430-44ca-b3bc-c40e492ef8b4/sub-c-0a33ef98-1ef7-11e6-84f2-02ee2ddab7fe/0/test/0/%7B%22light%22%3A"+l+"%7D HTTP/1.1");<br>
+                            client.println("Host: pubsub.pubnub.com");<br>
+                            client.println("User-Agent: ArduinoWiFi/1.1");<br>
+                            client.println("Connection: close");<br>
+                            client.println();<br>
+                          } else {<br>
+                            Serial.println("connection failed");<br>
+                          }<br>
+                          delay(delayTime);<br>
+                        }<br>
+<br>
+                        void printWifiStatus() {<br>
+                          Serial.print("SSID: "); Serial.println(WiFi.SSID());<br>
+                          IPAddress ip = WiFi.localIP();<br>
+                          Serial.print("IP Address: ");<br>
+                          Serial.println(ip);<br>
+                          long rssi = WiFi.RSSI();<br>
+                          Serial.print("signal strength (RSSI):");<br>
+                          Serial.print(rssi);<br>
+                          Serial.println(" dBm");<br>
+                        }<br>
+                      </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+      <div class="col-sm-3 col-xs-12">
+        <button class="btn btn-primary glyphicon glyphicon-headphones" data-toggle="modal" data-target="#largeModal4"></button>
+        <h4>Audio</h4>
+        <p>Click the headphones</p>
+        <!-- Large modal -->
+        <div id="largeModal4" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <a href="file:///Users/emilymoses/Code/GraphSense/public/templates/user/pressure_sensor_code.ino" download> ⇩ </a>
+                        <span id="modal-text" class="modal-title">Audio Sensor C++ Code</span>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      <p>
+                        /****************************************<br>
+                        Example Sound Level Sketch for the<br>
+                        Adafruit Microphone Amplifier<br>
+                        ****************************************/<br>
+                        #include < WiFi101.h > <br>
+<br>
+                        static char ssid[] = "YOUR WIFI SSID";<br>
+                        static char password[] = "YOUR WIFI PASSWORD";<br>
+                        int keyIndex = 0;<br>
+                        int status = WL_IDLE_STATUS;<br>
+                        const char server[] = "pubsub.pubnub.com";<br>
+                        WiFiClient client;<br>
+<br>
+                        int audio = A0;<br>
+                        int delayTime = 5000;<br>
+<br>
+                        const int sampleWindow = 50; // Sample window width in mS (50 mS = 20Hz)<br>
+                        unsigned int sample;<br>
+<br>
+                        void setup() {<br>
+                           Serial.begin(115200);<br>
+                           delay(10);<br>
+                           pinMode(audio, INPUT);<br>
+<br>
+                           while (status != WL_CONNECTED) {<br>
+                            Serial.print("Attempting to conenct to SSID: ");<br>
+                            Serial.println(ssid);<br>
+                            status = WiFi.begin(ssid, password);<br>
+                            delay(10000);<br>
+                           }<br>
+                           printWifiStatus();<br>
+                        }<br>
+<br>
+
+                        void loop() {<br>
+                           unsigned long startMillis= millis();  // Start of sample window<br>
+                           unsigned int peakToPeak = 0;   // peak-to-peak level<br>
+<br>
+                           unsigned int signalMax = 0;<br>
+                           unsigned int signalMin = 1024;<br>
+<br>
+                           // collect data for 50 mS<br>
+                           while (millis() - startMillis < sampleWindow)<br>
+                           {<br>
+                              sample = analogRead(0);<br>
+                              if (sample < 1024)  // toss out spurious readings<br>
+                              {<br>
+                                 if (sample > signalMax)<br>
+                                 {<br>
+                                    signalMax = sample;  // save just the max levels<br>
+                                 }<br>
+                                 else if (sample < signalMin)<br>
+                                 {<br>
+                                    signalMin = sample;  // save just the min levels<br>
+                                 }<br>
+                              }<br>
+                           }<br>
+                           peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude<br>
+                           double volts = (peakToPeak * 3.3) / 1024;  // convert to volts<br>
+                           int audio = volts * 100;<br>
+<br>
+                           Serial.println(audio);<br>
+<br>
+                            String audioToPubnub = String(audio);<br>
+                            client.stop();<br>
+                             if(client.connect(server, 80)) {<br>
+                              client.println("GET /publish/pub-c-a3ff103c-13da-40f7-9134-45670c77ae43/sub-c-8740379a-1fcd-11e6-8b91-02ee2ddab7fe/0/test/0/%7B%22audio%22%3A"+audioToPubnub+"%7D HTTP/1.1");<br>
+                              client.println("Host: pubsub.pubnub.com");<br>
+                              client.println("User-Agent: ArduinoWiFi/1.1");<br>
+                              client.println("Connection: close");<br>
+                              client.println();<br>
+                             } else {<br>
+                              Serial.println("Connection failed!");<br>
+                             }<br>
+                           delay(500);<br>
+                        }<br>
+<br>
+                          void printWifiStatus(){<br>
+                            Serial.print("SSID: ");<br>
+                            Serial.print(WiFi.SSID());<br>
+                            IPAddress ip = WiFi.localIP();<br>
+                            Serial.print("IP Address: ");<br>
+                            Serial.println(ip);<br>
+                            long rssi = WiFi.RSSI();<br>
+                            Serial.print("signal strength (RSSI):");<br>
+                            Serial.print(rssi);<br>
+                            Serial.println(" dBm");<br>
+                          }<br>
+                      </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+<!-- /third section -->
+
+<!-- fourth section - Information -->
+<div id="information" class="pad-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="panel-title">HOW TO USE GRAPH SENSE</h2>
+          </div>
+          <div class="panel-body lead">
+            <p>If you have an Arduino and sensors to collect data, you can click on any one of the sensor icons above to download or copy/paste the .ino file into your Arduino console.</p>
+            <p>Visit Arduino for more information: <a href='https://www.arduino.cc/' target='_blank'>Arduino</a></p>
+            <p>Once you have the .ino file, be sure to input your WIFI SSID and password.  We use PubNub to collect the sensor data to be able to display on our site, and our PubNub key is already in the .ino file.</p>
+            <p>It is very important that you do not alter the .ino file in any other way. Alterations to the code might break the graphs, or may cause your data to display incorrectly!</p>
+            <p>If you're interested in finding a graph for a project or presentation, feel free to click the Search All Graphs link and you may search our database of every Light, Audio, Temperature and Atmospheric Pressure graph our users have accumulated so far.</p>
+            <p>Stay tuned for more options if you're interested in customizing the graphs further. We have some fun and flexible options in the mix!</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="panel-title">MORE RESOURCES</h2>
+          </div>
+          <div class="panel-body lead">
+            <p>I want to introduce you to a few of the excellent resources I used to create this app. In addition to GitHub, I used PubNub's service to hold blobs of data and I used High Charts to beautifully display said data.</p>
+            <p>I still have a few tricks up my sleeve in order to allow users to customize their data within High Charts and to ensure we don't exceed PubNub's 1 million messages per month restriction</p>
+            <p>Visit PubNub here to read more: <a href='https://www.pubnub.com/' target='_blank'>PubNub</a></p>
+            <p>Visit High Charts here to read more: <a href='http://www.highcharts.com/' target='_blank'>High Charts</a></p>
+            <br>
+            <p>If you have any questions or comments for me, feel free to send me an email.</p>
+            <p>I'm always up for coffee: <a href="mailto:e.a.moses@gmail.com?subject=GraphSense" target='_blank'>Email me!</a></p>
+            <p>Visit my GitHub: <a href='https://github.com/eamoses' target='_blank'>Emily's GitHub</a></p>
+            <p>Visit my LinkedIn: <a href='https://linkedin.com/in/emilyannemoses' target='_blank'>Emily's LinkedIn</a></p>
+            <p>Visit my portfolio: <a href='http://www.emilyannemoses.com' target='_blank'>Emily's Portfolio</a></p>
+            <p>ENJOY Graph Sense!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /fourth section -->
+
+<!-- fifth section -->
+<div id="services" class="pad-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h3>Questions or Comments?</h3>
+        <h4>Contact me on GitHub or LinkedIn!</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /fifth section -->
+
+<!-- footer -->
+<footer>
+  <div class="container">
+  <a href="https://github.com/eamoses" target="_blank">
+    <img src="styles/images/githublogo.png" alt="Github Logo" width="100" height="100"></img>
+  </a>
+
+  <a href="https://www.linkedin.com/in/emilyannemoses" target="_blank">
+    <img src="styles/images/linkedinlogo.png" alt="LinkedIn Logo" width="100" height="100"></img>
+  </a>
+  <hr/>
+    <p>Copyright &copy; Emily Anne Moses 2016</p>
+  </div>
+</footer>
+<!-- /footer -->

@@ -1,0 +1,41 @@
+<button class="btn btn-primary glyphicon glyphicon-user" data-toggle="modal" data-target="#largeModal6"></button>
+<hr>
+<div class="row">
+
+   <div id='containerOne' class="col-xs-12 col-md-10" style='font-size: 22px; color:red;'>Loading graph, please wait a moment...
+   </div>
+
+</div>
+
+<div id="largeModal6" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+
+                <div class="modal-body">
+                  <h3>{{main.currentUser.userName}}</h3>
+                  <p><strong>Username:</strong> {{main.currentUser.userName}}</p>
+                  <p><strong>Email:</strong> {{main.currentUser.email}}</p>
+                  <p><strong>Current Location:</strong>{{main.currentUser.currentLocation}}</p>
+                  <hr>
+                  <a href="#" ng-click="profileCtrl.showEditForm=true" ng-hide="profileCtrl.showEditForm" class="btn btn-default"><i class="fa fa-pencil"></i> Edit Profile</a>
+                  <hr>
+                  <form ng-submit="profileCtrl.updateProfile()" ng-show="profileCtrl.showEditForm">
+                    <div class="form-group">
+                      <input type="text" ng-model="profileCtrl.new_profile.email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" ng-model="profileCtrl.new_profile.currentLocation" class="form-control" placeholder="Current Location">
+                    </div>
+                    <input type="submit" value="Save Profile" class="btn btn-block btn-info">
+                    <hr>
+                  </form>
+              </div>
+         </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.pubnub.com/pubnub-3.7.15.min.js"></script>
+    <script type="text/javascript" src="scripts/profileGraph.js"></script>

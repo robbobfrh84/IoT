@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="GraphSense">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+
+  <link rel='icon' href='/public/styles/images/favIcon.png' type='image'/ >
+
+  <!-- BOOTSTRAP BOOTSTRAP BOOTSTRAP BOOTSTRAP BOOTSTRAP BOOTSTRAP BOOTSTRAP bootstrap css -->
+  <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <!-- font awesome -->
+  <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <!-- BOOTSTRAP BOOTSTRAP BOOTSTRAP BOOTSTRAP BOOTSTRAP BOOTSTRAP BOOTSTRAP bootstrap css -->
+
+
+  <!-- HIGH CHARTS-->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/highcharts.src.js"></script>
+  <script src="https://code.highcharts.com/adapters/standalone-framework.js"></script>
+  <!--HIGH CHARTS-->
+
+
+  <!-- custom styles -->
+  <link rel="stylesheet" type="text/css" href="styles/style.css">
+
+  <!-- Angular -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/satellizer/0.13.4/satellizer.min.js"></script>
+
+  <!-- custom script (angular app) -->
+  <script type="text/javascript" src="scripts/controllers/auth-login.controller.js"></script>
+  <script type="text/javascript" src="scripts/controllers/auth-logout.controller.js"></script>
+  <script type="text/javascript" src="scripts/controllers/main.controller.js"></script>
+  <script type="text/javascript" src="scripts/controllers/graphs-index.controller.js"></script>
+  <script type="text/javascript" src="scripts/controllers/graphs-new.controller.js"></script>
+  <script type="text/javascript" src="scripts/controllers/graphs-show.controller.js"></script>
+  <script type="text/javascript" src="scripts/controllers/user-profile.controller.js"></script>
+  <script type="text/javascript" src="scripts/controllers/user-signup.controller.js"></script>
+  <script type="text/javascript" src="scripts/services/user.service.js"></script>
+  <script type="text/javascript" src="scripts/routes.js"></script>
+  <script type="text/javascript" src="scripts/app.js"></script>
+  <script type="text/javascript" src="scripts/hardHistory.js"></script>
+
+  <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script src="https://cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.05/pubnub-flex-history-min.js"></script>
+  <script src="https://cdn.pubnub.com/pubnub-3.7.15.min.js"></script>
+
+  <!--PUBNUB-->
+  <script src="https://cdn.pubnub.com/pubnub-3.7.21.js"></script>
+  <script src="https://cdn.pubnub.com/sdk/pubnub-angular/pubnub-angular-3.1.1.js"></script>
+  <!--PUBNUB-->
+
+  <title>Graph Sense</title>
+</head>
+<body ng-controller="MainController as main">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a id="nav-text" class="navbar-brand" href="/">Graph Sense</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li ng-show="!main.currentUser.isLoggedIn()"><a id="sign-text" href="/signup">Sign Up</a></li>
+          <li ng-show="!main.currentUser.isLoggedIn()"><a id="log-text" href="/login">Log In</a></li>
+          <li ng-show="main.currentUser.isLoggedIn()"><a id="user-text" href="/profile">{{main.currentUser.userName}}'s profile</a></li>
+          <li ng-show="main.currentUser.isLoggedIn()"><a id="out-text" href="/logout">Log Out</a></li>
+          <li><a id="search-text" href="/graphs">Search All Graphs</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+    <div class="container">
+      <div class="row">
+        <div ng-view>
+        </div>
+      </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+ /* general styles */
+ body {
+   margin: 0;
+ }
+ h3{
+   font-family: Avenir;
+ }
+ h2{
+   font-family: Avenir;
+ }
+ h4{
+   font-family: Avenir;
+ }
+ p{
+   font-family: Avenir;
+   line-height: 2rem;
+ }
+ button{
+   outline: none !important;
+ }
+ nav{
+   color: white;
+   background-color: black;
+ }
+ nav ul a,
+ nav .brand-logo {
+   color: white;
+ }
+ .button-collapse {
+   color: #26a69a;
+ }
+ .icon-block {
+   padding: 0 15px;
+ }
+ .icon-block .material-icons {
+   font-size: inherit;
+ }
+ .modal-body{
+   font-family: Avenir;
+   font-size: 12px;
+   color: black;
+   text-align: left;
+ }
+ div .col-xs-12{
+   font-family: Avenir;
+   font-size: 16px;
+   color: white;
+ }
+
+/* STYLES in views/index.html*/
+ div.container-fluid{
+   color: white;
+   background-color: black;
+ }
+ #search-text{
+   font-family: Avenir;
+   color: white;
+   opacity: 1;
+ }
+ #out-text{
+   font-family: Avenir;
+   color: white;
+   opacity: 1;
+ }
+ #log-text{
+   font-family: Avenir;
+   color: white;
+   opacity: 1;
+ }
+ #sign-text{
+   font-family: Avenir;
+   color: white;
+   opacity: 1;
+ }
+ #user-text{
+   font-family: Avenir;
+   color: white;
+   opacity: 1;
+ }
+ #nav-text{
+   font-family: Avenir;
+   color: white;
+   opacity: 1;
+ }
+ /* STYLES in user/index.html */
+ .pad-section {
+   padding: 50px 0;
+ }
+ .pad-section img {
+   width: 100%;
+ }
+ .text-vcenter h1 {
+   font-size: 4.5em;
+   font-weight: 700;
+   font-family: Avenir;
+   margin: 0;
+   padding: 0;
+ }
+ .text-vcenter {
+   display: table-cell;
+   text-align: center;
+   vertical-align: middle;
+ }
+ #services{
+   width: 100%;
+   background-color: black;
+   color: #ffffff;
+   margin: 0;
+ }
+ #modal-text{
+   color:black;
+ }
+ #home {
+   /*background: url(../images/home.jpg) no-repeat center center fixed;*/
+   display: table;
+   height: 100%;
+   position: relative;
+   width: 100%;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+ }
+ #services .glyphicon {
+   border: 2px solid #FFFFFF;
+   border-radius: 50%;
+   display: inline-block;
+   font-size: 60px;
+   height: 140px;
+   line-height: 140px;
+   text-align: center;
+   vertical-align: middle;
+   width: 140px;
+ }
+ #information {
+   /*background: url(../images/estate.jpg) no-repeat center center fixed;*/
+   display: table;
+   height: 800px;
+   position: relative;
+   width: 100%;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+ }
+ #information .panel {
+   opacity: 0.85;
+ }
+
+
+ /* RESPONSIVENESS */
+
+@media only screen and (max-width : 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%;
+  }
+  #index-banner .section {
+    top: 10%;
+    background-color: black;
+  }
+}
+
+@media only screen and (max-width : 600px) {
+  #index-banner .section {
+    top: 0;
+  }
+}
+
+/*FOOTER STYLES*/
+footer div p{
+  text-align: center;
+}
+footer div{
+  text-align: center;
+}
+footer {
+  padding: 20px 0;
+}
+footer .glyphicon {
+  color: #333333;
+  font-size: 60px;
+}
+footer .glyphicon:hover {
+  color: #306d9f;
+}
+footer.page-footer {
+  margin: 0;
+}
