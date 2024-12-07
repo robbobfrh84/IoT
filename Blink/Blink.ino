@@ -1,4 +1,5 @@
-const int led1 = 1;
+const int led1 = LED_BUILTIN;
+// const int led1 = 13;
 
 void setup() {
   pinMode(led1, OUTPUT);
