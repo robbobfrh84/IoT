@@ -3,7 +3,7 @@
 #define LED_PIN     12
 #define NUM_LEDS    1
 #define BRIGHTNESS  255 // 0-255
-#define LED_TYPE    WS2811
+#define LED_TYPE    WS2811 // * LED String Strip Big: WS2811, Small string strip (Christmas light style): WS2812B 
 #define COLOR_ORDER RGB
 CRGB leds[NUM_LEDS];
 
